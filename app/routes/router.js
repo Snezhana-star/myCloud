@@ -11,7 +11,11 @@ router.post('/login', AuthController.login)
 router.post('/logout', AuthController.logout)
 router.get('/refresh-tokens', AuthController.refreshTokens)
 //folder
+router.get('/', authMiddleware, FolderController.AllFolder)
 router.get('/:foldername', authMiddleware, FolderController.viewFolder)
 router.post('/create-folder', authMiddleware, FolderController.createFolder)
+router.post('/:foldername/update', authMiddleware, FolderController.updateName)
+router.post('/:foldername/move', authMiddleware, FolderController.moveFolder)
+router.delete('/:foldername/delete', authMiddleware, FolderController.delete)
 
 module.exports = router
