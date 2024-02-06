@@ -1,6 +1,7 @@
 const Router = require('express').Router;
 const AuthController = require('../controllers/authController')
 const FolderController = require('../controllers/FolderController')
+const FileController = require('../controllers/FileController')
 const authMiddleware = require('../middlewares/auth-middleware')
 const router = new Router();
 
@@ -17,5 +18,8 @@ router.post('/create-folder', authMiddleware, FolderController.createFolder)
 router.post('/:foldername/update', authMiddleware, FolderController.updateName)
 router.post('/:foldername/move', authMiddleware, FolderController.moveFolder)
 router.delete('/:foldername/delete', authMiddleware, FolderController.delete)
+//file
+router.post('/:foldername/upload', authMiddleware, FileController.upload)
+router.delete('/:filename/deletefile', authMiddleware, FileController.delete)
 
 module.exports = router

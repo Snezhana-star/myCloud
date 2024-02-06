@@ -3,13 +3,15 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const router = require('./app/routes/router')
+const fileUpload = require('express-fileupload')
 require('dotenv').config()
-// const errorMiddleware = require('./app/middlewarws/errorMiddleware')
 const app = express()
 
 
 app.use(express.json());
+app.use(express.static('files'));
 app.use(cookieParser());
+app.use(fileUpload({}))
 app.use(cors());
 app.use('/api', router)
 // app.use(errorMiddleware);
