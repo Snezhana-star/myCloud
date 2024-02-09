@@ -41,7 +41,7 @@ class FolderService {
     }
 
     async updateName(newName, accessToken, foldername) {
-        if (foldername === 'root'){
+        if (foldername === 'root') {
             throw new Error('Нельзя изменить корневую папку')
         }
         const decodedToken = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
@@ -50,13 +50,13 @@ class FolderService {
         if (!ownFolder) {
             throw new Error('Доступ запрещён')
         }
-        ownFolder.name=newName
+        ownFolder.name = newName
         const updatedFolder = await ownFolder.save();
         return updatedFolder
     }
 
-    async moveFolder(newParentName,accessToken,foldername) {
-        if (foldername === 'root'){
+    async moveFolder(newParentName, accessToken, foldername) {
+        if (foldername === 'root') {
             throw new Error('Нельзя изменить корневую папку')
         }
         const decodedToken = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
@@ -66,7 +66,7 @@ class FolderService {
             throw new Error('Доступ запрещён')
         }
         const newParent = await Folder.findOne({name: newParentName, userId: userId})
-        if (!newParent){
+        if (!newParent) {
             throw new Error('Такой папки нет')
         }
         ownFolder.parentId = newParent._id
@@ -74,8 +74,8 @@ class FolderService {
         return updatedFolder
     }
 
-    async delete(accessToken,foldername) {
-        if (foldername === 'root'){
+    async delete(accessToken, foldername) {
+        if (foldername === 'root') {
             throw new Error('Нельзя удалить корневую папку')
         }
         const decodedToken = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
@@ -84,8 +84,8 @@ class FolderService {
         if (!ownFolder) {
             throw new Error('Доступ запрещён')
         }
-        await Folder.deleteOne({_id:ownFolder._id})
-        await Folder.deleteMany({parentId:ownFolder._id})
+        await Folder.deleteOne({_id: ownFolder._id})
+        await Folder.deleteMany({parentId: ownFolder._id})
     }
 }
 

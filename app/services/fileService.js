@@ -37,6 +37,7 @@ class FileService {
             if (err) throw err;
             console.log('Файл успешно удалён');
         })
+
     }
 }
 
